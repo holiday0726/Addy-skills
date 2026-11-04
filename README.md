@@ -5,7 +5,7 @@ Addy Osmani 의 글 "Critical thinking when agents do the work" 를 바탕으로
 
 ## 메인 스킬
 
-먼저 [agent-oversight](agent-oversight/SKILL.md) 를 씁니다.
+먼저 [agent-oversight](skills/agent-oversight/SKILL.md) 를 씁니다.
 글에서 가장 실행 가능한 네 원칙만 남긴 짧은 스킬입니다.
 
 1. 검증됨을 먼저 정한다. 끝난 뒤에 정하면 어떤 결과든 합리화한다.
@@ -21,12 +21,12 @@ Addy Osmani 의 글 "Critical thinking when agents do the work" 를 바탕으로
 
 | 순서 | 스킬 | 언제 쓰나 | 핵심 |
 |---|---|---|---|
-| 1 | [clarify-intent-before-work](clarify-intent-before-work/SKILL.md) | 일을 시작하거나 맡기기 전 | 가설, 도움인지 대신인지, 브리프, 흐리면 인터뷰 |
-| 2 | [verification-loop](verification-loop/SKILL.md) | 체크를 세울 때와 끝내기 직전 | 검증됨을 먼저 정하기, 스스로 검증할 수단, 증명한 것과 증명하지 않은 것, 놓친 것 재점검, 체크 강화 |
-| 3 | [review-agent-output](review-agent-output/SKILL.md) | 다른 에이전트의 결과를 받았을 때 | 증거 먼저, 대신 내린 결정 찾기, 숫자 하나와 원본 하나 확인 |
-| 4 | [rebuild-understanding](rebuild-understanding/SKILL.md) | 결과를 내 것으로 이해해야 할 때 | 모르는 곳 찾기, 필요한 조각만 다시 세우기, 변경 보고서와 퀴즈, 연습 점검 |
-| 5 | [decision-support](decision-support/SKILL.md) | 사람이 큰 결정을 내릴 때 | 틀리려면 무엇이 참이어야 하나, 반론, 결정 요청 형식 |
-| 6 | [capture-misses](capture-misses/SKILL.md) | 같은 지적이나 실수가 반복될 때 | 원인을 테스트, 훅, 스킬, 메모리에 남기기 |
+| 1 | [clarify-intent-before-work](skills/clarify-intent-before-work/SKILL.md) | 일을 시작하거나 맡기기 전 | 가설, 도움인지 대신인지, 브리프, 흐리면 인터뷰 |
+| 2 | [verification-loop](skills/verification-loop/SKILL.md) | 체크를 세울 때와 끝내기 직전 | 검증됨을 먼저 정하기, 스스로 검증할 수단, 증명한 것과 증명하지 않은 것, 놓친 것 재점검, 체크 강화 |
+| 3 | [review-agent-output](skills/review-agent-output/SKILL.md) | 다른 에이전트의 결과를 받았을 때 | 증거 먼저, 대신 내린 결정 찾기, 숫자 하나와 원본 하나 확인 |
+| 4 | [rebuild-understanding](skills/rebuild-understanding/SKILL.md) | 결과를 내 것으로 이해해야 할 때 | 모르는 곳 찾기, 필요한 조각만 다시 세우기, 변경 보고서와 퀴즈, 연습 점검 |
+| 5 | [decision-support](skills/decision-support/SKILL.md) | 사람이 큰 결정을 내릴 때 | 틀리려면 무엇이 참이어야 하나, 반론, 결정 요청 형식 |
+| 6 | [capture-misses](skills/capture-misses/SKILL.md) | 같은 지적이나 실수가 반복될 때 | 원인을 테스트, 훅, 스킬, 메모리에 남기기 |
 
 ```
 1 의도 분명히 하기
@@ -71,16 +71,28 @@ Addy Osmani 의 글 "Critical thinking when agents do the work" 를 바탕으로
 
 ## 설치
 
-Claude Code 에서 쓰려면 스킬 폴더를 스킬 경로에 넣습니다.
+Claude Code 플러그인으로 설치합니다.
+스킬 일곱 개와 SessionStart 훅이 함께 들어옵니다.
 
-```bash
-git clone https://github.com/holiday0726/Addy-skills.git
-cp -r Addy-skills/*/ ~/.claude/skills/
+```
+/plugin install addy-skills --marketplace holiday0726/Addy-skills
 ```
 
-프로젝트에만 넣으려면 `~/.claude/skills/` 대신 프로젝트의 `.claude/skills/` 에 복사합니다.
-humanizer 스킬은 따로 설치합니다.
-없으면 각 스킬의 "내보내는 글" 규칙만 적용됩니다.
+예전 판 Claude Code 에서는 두 줄로 나눠 설치합니다.
+
+```
+/plugin marketplace add holiday0726/Addy-skills
+/plugin install addy-skills@addy-skills
+```
+
+스킬 이름은 `addy-skills:agent-oversight` 처럼 앞에 플러그인 이름이 붙습니다.
+
+## SessionStart 훅
+
+세션을 시작하거나 대화를 비우거나 압축할 때, 언제 어느 스킬을 쓰는지 표를 컨텍스트에 넣습니다.
+권유만 하고 막지는 않습니다.
+사용자나 프로젝트 지침이 다르게 정하면 그쪽을 따르라고 함께 적었습니다.
+표 내용은 [hooks/usage.md](hooks/usage.md) 에 있습니다.
 
 ## 출처
 

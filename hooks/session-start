@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Addy-skills SessionStart 훅: 스킬을 언제 쓰는지 안내를 컨텍스트에 넣는다(권유만, 막지 않음).
+set -u
+case "$0" in
+  */*) DIR="$(cd "${0%/*}" && pwd)" ;;
+  *) DIR="$(pwd)" ;;
+esac
+f="$DIR/usage.md"
+[ -r "$f" ] || exit 0
+s="$(<"$f")"
+s="${s//\\/\\\\}"; s="${s//\"/\\\"}"; s="${s//$'\n'/\\n}"; s="${s//$'\r'/}"; s="${s//$'\t'/\\t}"
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$s"
