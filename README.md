@@ -97,3 +97,7 @@ Claude Code 플러그인으로 설치합니다.
 ## 출처
 
 - Addy Osmani, "Critical thinking when agents do the work"
+
+## 라이선스
+
+MIT

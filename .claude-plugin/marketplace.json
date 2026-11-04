@@ -12,7 +12,8 @@
       "source": "./",
       "author": {
         "name": "holiday0726"
-      }
+      },
+      "license": "MIT"
     }
   ]
 }
