@@ -11,3 +11,5 @@ Addy-skills 플러그인이 켜져 있습니다.
 | 사용자가 결과를 이해하려고 물을 때 | addy-skills:rebuild-understanding |
 | 사용자의 판단이나 고민을 정리할 때, 권고안을 낼 때 | addy-skills:decision-support |
 | 같은 지적이나 같은 실수가 반복될 때 | addy-skills:capture-misses |
+| 사람이 읽는 글(보고, 문서, PR 본문)을 쓰거나 고칠 때 | addy-skills:humanizer |
+| 커밋, 머지, 태그, PR 문구를 쓸 때 | addy-skills:git-message |

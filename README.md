@@ -62,6 +62,16 @@ Addy Osmani 의 글 "Critical thinking when agents do the work" 를 바탕으로
 | 유지보수할 사람 앞에서 걸 수 있는가 | 2, 5 |
 | 기준에 못 미친 이유를 다시 안 일어나게 남겼는가 | 6 |
 
+## 글쓰기 스킬
+
+위 일곱 스킬이 내보내는 글과 커밋 문구를 다듬는 스킬 둘입니다.
+lanekeeper 플러그인에 있던 것을 1.1.0 에서 이 플러그인으로 옮겼습니다.
+
+| 스킬 | 언제 쓰나 | 핵심 |
+|---|---|---|
+| [humanizer](skills/humanizer/SKILL.md) | 사람이 읽는 글을 쓰거나 고칠 때 | AI 가 쓴 티(대비 구문, 한 줄 마무리, 세 개 나열, 줄표)를 지우고 글쓴이 말투로. 가운뎃점, 줄표, 화살표, 낱말 잇는 하이픈 금지 |
+| [git-message](skills/git-message/SKILL.md) | 커밋, 머지, 태그, PR 문구를 쓸 때 | 제목 한 줄과 개조식 본문, 명사형 종결 |
+
 ## 공통 기준
 
 - 에이전트의 도움을 받아도 결과를 설명할 수 없다면 이미 책임을 넘긴 것입니다.
@@ -72,7 +82,7 @@ Addy Osmani 의 글 "Critical thinking when agents do the work" 를 바탕으로
 ## 설치
 
 Claude Code 플러그인으로 설치합니다.
-스킬 일곱 개와 SessionStart 훅이 함께 들어옵니다.
+스킬 아홉 개, SessionStart 훅, git 문구 검사 훅(기본 꺼짐)이 함께 들어옵니다.
 
 ```
 /plugin install addy-skills --marketplace holiday0726/Addy-skills
@@ -94,9 +104,33 @@ Claude Code 플러그인으로 설치합니다.
 사용자나 프로젝트 지침이 다르게 정하면 그쪽을 따르라고 함께 적었습니다.
 표 내용은 [hooks/usage.md](hooks/usage.md) 에 있습니다.
 
+## git 문구 검사 훅
+
+`git commit`, `merge`, `tag`, `revert` 와 `gh pr create`, `edit` 를 실행하기 직전에 문구가 git-message 규칙을 어기면 막습니다.
+기본은 꺼져 있고, 꺼져 있으면 Python 을 띄우지 않고 바로 통과합니다.
+
+```
+claude plugin configure addy-skills@addy-skills
+```
+
+여기서 `git_message_check` 를 켜고 `python` 에 Python 3 명령을 넣습니다.
+Linux 와 macOS 는 `python3`(기본값), Windows 는 `C:/.../python.exe` 같은 절대 경로입니다.
+훅 입구는 bash 스크립트라 Windows 에서는 Git Bash 가 있어야 합니다.
+켠 뒤 잠시 끄려면 환경 변수 `CLAUDE_GIT_STYLE=off` 를 둡니다.
+
+## 시험 돌리기
+
+```sh
+python3 tests/test_style_basic.py     # git 문구 기본 규칙과 켜기 설정
+python3 tests/test_style_multi.py     # 한 명령에 git 명령이 여럿일 때
+python3 tests/test_hook_wrapper.py    # 훅 입구, 꺼져 있으면 Python 없이 통과
+claude plugin validate --strict .
+```
+
 ## 출처
 
 - Addy Osmani, "Critical thinking when agents do the work"
+- `skills/humanizer`: [blader/humanizer](https://github.com/blader/humanizer), MIT, `skills/humanizer/LICENSE`
 
 ## 라이선스
 

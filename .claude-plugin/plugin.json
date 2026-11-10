@@ -1,7 +1,7 @@
 {
   "name": "addy-skills",
   "description": "에이전트에게 일을 맡기고 결과를 받는 흐름에 비판적 사고를 끼워 넣는 스킬 모음(Addy Osmani, Critical thinking when agents do the work)",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/holiday0726/Addy-skills",
   "repository": "https://github.com/holiday0726/Addy-skills",
   "keywords": [
@@ -14,5 +14,19 @@
   "author": {
     "name": "holiday0726"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "userConfig": {
+    "python": {
+      "type": "string",
+      "title": "Python 실행 명령",
+      "description": "git 문구 검사 훅을 돌릴 Python 3 명령입니다. 훅을 켤 때만 씁니다. Linux와 macOS는 python3, Windows는 python.exe 절대 경로(C:/.../python.exe)를 권장합니다.",
+      "default": "python3"
+    },
+    "git_message_check": {
+      "type": "boolean",
+      "title": "git 문구 검사",
+      "description": "켜면 git commit, merge, tag, revert 와 gh pr create, edit 의 문구를 개조식 규칙으로 검사하고 어기면 막습니다. 설정하지 않으면 꺼짐입니다.",
+      "default": false
+    }
+  }
 }
