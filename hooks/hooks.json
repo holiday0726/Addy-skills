@@ -17,12 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash",
-            "args": [
-              "${CLAUDE_PLUGIN_ROOT}/hooks/git-message-check",
-              "${user_config.git_message_check}",
-              "${user_config.python}"
-            ],
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/git-message-check\" \"${user_config.git_message_check}\" \"${user_config.python}\"",
             "timeout": 10,
             "statusMessage": "커밋 문구 규칙 검사"
           }
