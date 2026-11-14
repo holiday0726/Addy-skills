@@ -7,8 +7,8 @@
 - 본문: 개조식(불릿), 서술형 종결어미 금지
 - 제목과 본문 사이 빈 줄 1개
 
-켜기: 플러그인 설정 git_message_check=true. hooks.json 이 첫 인자로 넘기고, 환경변수
-CLAUDE_PLUGIN_OPTION_GIT_MESSAGE_CHECK 로도 읽는다. 기본은 꺼짐이라 바로 통과한다.
+켜기: 플러그인 설정 git_message_check=true. 입구 hooks/git-message-check 가 환경변수
+CLAUDE_PLUGIN_OPTION_GIT_MESSAGE_CHECK 를 보고 켜졌을 때 첫 인자 true 로 넘긴다. 기본은 꺼짐이라 바로 통과한다.
 해제: CLAUDE_GIT_STYLE=off
 """
 import json

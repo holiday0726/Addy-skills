@@ -8,7 +8,7 @@
     {
       "name": "addy-skills",
       "description": "에이전트에게 일을 맡기고 결과를 받는 흐름에 비판적 사고를 끼워 넣는 스킬 모음",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "source": "./",
       "author": {
         "name": "holiday0726"

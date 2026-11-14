@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# git 문구 검사 PreToolUse 훅 입구. 인자: <git_message_check> <python>
+# git 문구 검사 PreToolUse 훅 입구. 설정은 Claude Code 가 넘기는 환경 변수로 읽는다.
+#   CLAUDE_PLUGIN_OPTION_GIT_MESSAGE_CHECK  켜기(true/1/yes/on). 없거나 다른 값이면 꺼짐
+#   CLAUDE_PLUGIN_OPTION_PYTHON             Python 3 명령. 없거나 비면 python3
+# 셸 형태 command 에는 ${user_config.*} 를 쓸 수 없다. 쓰면 Claude Code 가 훅을 돌리지 않고 거부한다.
 # 꺼져 있으면(기본) Python 을 띄우지 않고 바로 통과한다. Python 이 없는 PC 에서도 오류가 나지 않는다.
 set -u
-on="$(printf ' %s %s ' "${1:-}" "${CLAUDE_PLUGIN_OPTION_GIT_MESSAGE_CHECK:-}" | tr 'A-Z' 'a-z')"
+on="$(printf '%s' "${CLAUDE_PLUGIN_OPTION_GIT_MESSAGE_CHECK:-}" | tr 'A-Z' 'a-z')"
 case "$on" in
-  *" true "*|*" 1 "*|*" yes "*|*" on "*) ;;
+  true|1|yes|on) ;;
   *) exit 0 ;;
 esac
-py="${2:-}"
-case "$py" in ''|'${user_config.python}') py=python3 ;; esac
+py="${CLAUDE_PLUGIN_OPTION_PYTHON:-}"
+[ -n "$py" ] || py=python3
 exec "$py" "${0%/*}/git-message-style.py" true
